@@ -1,10 +1,9 @@
 class RockPaperScissors {
     constructor(pWindow, pDoc) {
 
-        this.Doc = pDoc;
+        this.doc = pDoc;
         this.win = pWindow;
         this.userChoice = '';
-        this.computerChoice = this.getComputerChoice();
         this.score = 0;
 
     }
@@ -25,8 +24,7 @@ class RockPaperScissors {
                 this.userChoice = 'scissors';
             }
         }
-
-        this.determineWinner();
+        this.SetScreenValue("value", this.determineWinner());
     }
 
     getComputerChoice() {
@@ -42,40 +40,43 @@ class RockPaperScissors {
     }
 
     determineWinner() {
-        console.log(this.userChoice, this.computerChoice);
-        if (this.userChoice === this.computerChoice) {
-            this.SetScreenValue('This game is a tie!');
+
+        var computerChoice = this.getComputerChoice();
+
+        if (this.userChoice === computerChoice) {
+            return 'This game is a tie!';
         }
         if (this.userChoice === 'rock') {
-            if (this.computerChoice === 'paper') {
-                this.SetScreenValue('Computer won.');
+            if (computerChoice === 'paper') {
+                return 'Computer won.';
             } else {
-                ++this.score;
-                this.SetScreenValue('You won.');
+                this.SetScreenValue('stars', 'Gold stars: ' + ++this.score);
+                return 'You won.';
             }
         }
         if (this.userChoice === 'paper') {
-            if (this.computerChoice === 'rock') {
-                ++this.score;
-                this.SetScreenValue('You won.');
+            if (computerChoice === 'rock') {
+                this.SetScreenValue('stars', 'Gold stars: ' + ++this.score);
+                return 'You won.';
             } else {
-                this.SetScreenValue('Computer won.');
+                return 'Computer won.';
             }
         }
         if (this.userChoice === 'scissors') {
-            if (this.computerChoice === 'rock') {
-                this.SetScreenValue('Computer won.');
+            if (computerChoice === 'rock') {
+                return 'Computer won.';
             } else {
-                ++this.score;
-                this.SetScreenValue('You won.');
+                this.SetScreenValue('stars', 'Gold stars: ' + ++this.score);
+                return 'You won';
             }
         }
     }
 
-    SetScreenValue(pValue) {
+    SetScreenValue(pFielName, pValue) {
 
         if (pValue != " ") {
-            this.doc.getElementById("value").value = pValue;
+            console.log(pFielName, pValue);
+            this.doc.getElementById(pFielName).innerHTML = pValue;
         }
     }
 
