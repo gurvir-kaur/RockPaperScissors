@@ -9,7 +9,7 @@ var gameObject;
 window.onload = function() {
 
     if (document.readyState === "complete") {
-        //declared variable convertes to an object of the class.
+        //declared variable converted into an object of the class.
         gameObject = new RockPaperScissors(window, document);
     }
 };
