@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/indexStyle.css">
 
     <!--Javascript files imported-->
     <script src="./js/main.js"></script>
@@ -15,23 +16,46 @@
 
 </head>
 
-<body class="container text-center" style="background-image: url('./media/background.png');">
-    <div class="container bg-info" style="margin: 1em; padding:1em">
-        <h1 class="py-2 m-2 text-white font-weight-bold">Waste an Hour Having Fun</h1>
-    </div>
-    <div class="d-flex justify-content-center p-2">
-        <h2>Hello there, wanna have some fun ?</h2>
-    </div>
-    <div class="d-flex justify-content-center p-4">
-        <img src="./media/Rock-paper-scissors.jpg" alt="A picture of Rock-paper-scissors" width="500px">
-    </div>
-    <div class="d-flex justify-content-center p-2">
-        <h3>Beat the computer by chosing your option and win points!</h3>
-    </div>
-    <div>
-        <button type="button" onclick="gameObject.navigateTo('home')" class="btn btn-success m-2 p-4 font-weight-bold " style="font-size:30px; ">Let's play it ! <i class="fas fa-play "></i></button>
-    </div>
+<body class="container-fluid text-center bg-light">
 
+    <!--background images-->
+    <ul class="circles">
+        <li><img src="./media/scissors.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/paper.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/paper.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/rock.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/scissors.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/scissors.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/rock.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/paper.png" alt="A picture of Rock" width="70px"></li>
+        <li><img src="./media/paper.png" alt="A picture of Rock" width="70px"></li>
+    </ul>
+
+    <div>
+        <div class="bg-info p-4 m-4">
+            <h1 class="m-2 text-white font-weight-bold">Waste an Hour Having Fun</h1>
+        </div>
+
+        <div class="justify-content-center p-2 text-muted" style="border-bottom: 5px solid rgb(71, 69, 69);">
+            <h2>Hello there, wanna have some fun ?</h2>
+        </div>
+        <div class="d-flex row p-4 align-items-center">
+            <div class="col justify-content-center">
+                <img src="./media/moreTime.gif" alt="A picture of Rock-paper-scissors" width="100%">
+
+            </div>
+            <div class="col">
+                <h3>Beat the computer by chosing your option and win points!</h3>
+                <h3>OR </h3>
+                <h3>just watch a game between two computers.</h3>
+            </div>
+            <div class="col">
+                <button type="button" onclick="gameObject.navigateTo('playerVScomputer')" class="btn btn-success btn-lg m-2 p-4 font-weight-bold">Player VS Computer <i class="fas fa-play "></i></button>
+                <button type="button" onclick="gameObject.navigateTo('computerVScomputer')" class="btn btn-danger btn-lg m-2 p-4 font-weight-bold">Computer VS Computer <i class="fas fa-play "></i></button>
+
+            </div>
+        </div>
+    </div>
 
     <!--Javascript-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js " integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj " crossorigin="anonymous "></script>

@@ -13,18 +13,53 @@ class RockPaperScissors {
         this.doc = pDoc;
         this.win = pWindow;
         this.userChoice = '';
-        this.score = 0;
+        this.playerPoints = 0;
+        this.computerPoints = 0;
         this.computerChoice = '';
+        this.continue = 0;
     }
+
+    play() {
+
+        while (this.continue < 100) {
+            var comp1 = this.getComputerChoice();
+            var comp2 = this.getComputerChoice();
+
+            this.determineWinner(comp1, comp2);
+            this.getMedia('compChoice1', comp1);
+            this.getMedia('compChoice2', comp2);
+
+            if (this.continue === 1) {
+                break;
+            }
+            ++this.continue;
+        }
+    }
+
 
     /**
      * this function controls the navigation between different screens
      * @param {String} pScreen 
      */
     navigateTo(pScreen) {
-        if (pScreen == 'home') {
-            this.win.location.href = "./home.html";
+        if (pScreen == 'playerVScomputer') {
+            this.win.location.href = "./playerVScomputer.html";
         }
+        if (pScreen == 'index') {
+            this.win.location.href = "./index.html";
+        }
+        if (pScreen == 'computerVScomputer') {
+            this.win.location.href = "./computerVScomputer.html";
+        }
+    }
+
+    /**
+     * resets the score
+     */
+    restart() {
+        this.computerPoints = this.playerPoints = 0;
+        this.SetScreenValue('computerPoints', this.computerPoints);
+        this.SetScreenValue('playerPoints', this.playerPoints);
     }
 
     /**
@@ -41,7 +76,9 @@ class RockPaperScissors {
                 this.userChoice = 'scissors';
             }
         }
-        this.SetScreenValue("value", this.determineWinner());
+        this.computerChoice = this.getComputerChoice();
+        this.getMedia('compChoice', this.computerChoice);
+        this.SetScreenValue("value", this.determineWinner(this.userChoice, this.computerChoice));
     }
 
     /**
@@ -62,45 +99,52 @@ class RockPaperScissors {
     /**
      * with this method the winner is declared by comparing choice/options
      */
-    determineWinner() {
+    determineWinner(option1, option2) {
 
-        this.computerChoice = this.getComputerChoice();
-        if (this.computerChoice === 'rock') {
-            this.SetScreenValue('compChoice', "<img src='./media/rock.png'width = 300px/>");
-        }
-        if (this.computerChoice === 'paper') {
-            this.SetScreenValue('compChoice', "<img src='./media/paper.png'width = 300px/>");
-        }
-        if (this.computerChoice === 'scissors') {
-            this.SetScreenValue('compChoice', "<img src='./media/scissors.png'width = 300px/>");
-        }
+        //option1 can be player or computer1
+        //option2 can be computer or computer2
 
-        if (this.userChoice === this.computerChoice) {
+        if (option1 === option2) {
             return 'This game is a tie!';
         }
-        if (this.userChoice === 'rock') {
-            if (this.computerChoice === 'paper') {
+        if (option1 === 'rock') {
+            if (option2 === 'paper') {
+                this.SetScreenValue('computerPoints', ++this.computerPoints);
                 return 'Computer won.';
             } else {
-                this.SetScreenValue('points', 'Points: ' + ++this.score);
+                this.SetScreenValue('playerPoints', ++this.playerPoints);
                 return 'You won.';
             }
         }
-        if (this.userChoice === 'paper') {
-            if (this.computerChoice === 'rock') {
-                this.SetScreenValue('points', 'Points: ' + ++this.score);
+        if (option1 === 'paper') {
+            if (option2 === 'rock') {
+                this.SetScreenValue('playerPoints', ++this.playerPoints);
                 return 'You won.';
             } else {
+                this.SetScreenValue('computerPoints', ++this.computerPoints);
                 return 'Computer won.';
             }
         }
-        if (this.userChoice === 'scissors') {
-            if (this.computerChoice === 'rock') {
+        if (option1 === 'scissors') {
+            if (option2 === 'rock') {
+                this.SetScreenValue('computerPoints', ++this.computerPoints);
                 return 'Computer won.';
             } else {
-                this.SetScreenValue('points', 'Points: ' + ++this.score);
+                this.SetScreenValue('playerPoints', ++this.playerPoints);
                 return 'You won';
             }
+        }
+    }
+
+    getMedia(pField, pOption) {
+        if (pOption === 'rock') {
+            this.SetScreenValue(pField, "<img src='./media/rock.png' width = 200px/>");
+        }
+        if (pOption === 'paper') {
+            this.SetScreenValue(pField, "<img src='./media/paper.png' width = 200px/>");
+        }
+        if (pOption === 'scissors') {
+            this.SetScreenValue(pField, "<img src='./media/scissors.png' width = 200px/>");
         }
     }
 
@@ -111,10 +155,8 @@ class RockPaperScissors {
      */
     SetScreenValue(pFielName, pValue) {
 
-        if (pValue != " ") {
-            console.log(pFielName, pValue);
-            this.doc.getElementById(pFielName).innerHTML = pValue;
-        }
+        this.doc.getElementById(pFielName).innerHTML = pValue;
+
     }
 
 }
