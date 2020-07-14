@@ -19,6 +19,9 @@ class RockPaperScissors {
         this.continue = 0;
     }
 
+    /**
+     * computer vs computer
+     */
     play() {
 
         while (this.continue < 100) {
@@ -136,6 +139,11 @@ class RockPaperScissors {
         }
     }
 
+    /**
+     * to get the images
+     * @param {String} pField 
+     * @param {String} pOption 
+     */
     getMedia(pField, pOption) {
         if (pOption === 'rock') {
             this.SetScreenValue(pField, "<img src='./media/rock.png' width = 200px/>");
